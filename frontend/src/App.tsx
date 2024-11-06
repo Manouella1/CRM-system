@@ -55,3 +55,33 @@ function App() {
 export default App;
 
 // const getDummy = (myTs) =>
+
+
+
+
+// import React from "react";
+// import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+// import Home from "";
+// import About from "./components/About";
+
+// function App() {
+//   return (
+//     <Router>
+//       <nav className="flex justify-center space-x-4 p-4">
+//         <Link className="text-blue-500 hover:underline" to="/">
+//           Hem
+//         </Link>
+//         <Link className="text-blue-500 hover:underline" to="/about">
+//           About
+//         </Link>
+//       </nav>
+
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/about" element={<About />} />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;

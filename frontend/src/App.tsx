@@ -1,36 +1,37 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import React, { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [heartVisible, setHeartVisible] = useState(false);
+  const [heartPosition, setHeartPosition] = useState({ x: 0, y: 0 });
+
+  const handleClick = (event: React.MouseEvent<HTMLHeadingElement>) => {
+    const { clientX, clientY } = event;
+    setHeartPosition({ x: clientX, y: clientY });
+    setHeartVisible(true);
+
+    // Dölj hjärtat efter animationens slut
+    setTimeout(() => setHeartVisible(false), 1000);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <h1 className="text-xl text-blue-900 font-bold underline">
-          Hello world!
-        </h1>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="flex items-center justify-center h-screen relative">
+      <h1
+        className="text-xl text-blue-900 font-bold hover:text-blue-400 cursor-pointer"
+        onClick={handleClick}
+      >
+        CRM System
+      </h1>
+
+      {heartVisible && (
+        <div
+          key={Math.random()}
+          className="absolute text-red-500 text-3xl animate-heart"
+          style={{ left: heartPosition.x, top: heartPosition.y }}
+        >
+          ❤️
+        </div>
+      )}
+    </div>
   );
 }
 

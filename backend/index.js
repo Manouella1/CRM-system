@@ -1,20 +1,35 @@
-
 // diverse importer
-// dotenv
+const path = require("path");
+const dotenv = require("dotenv");
 const express = require("express");
-// axios
-// cors
+const cors = require("cors");
+const dummy = require("./dummy.json");
 
-//  Lite grundstruktur
 const app = express();
 const port = process.env.port || 3000;
 
+app.use(cors());
+app.use(express.json());
+
 // edpoints
 
-// hämta användare från dummy
+app.get("/", (req, res) => {
+  res.send({ hello: " World!" });
+});
 
+// hämta användare från dummy
+app.get("/dummy", (req, res) => {
+  console.log(dummy);
+
+  res.json(dummy);
+});
 // skapa användarkonto - POST
-// /api/subscribers
+app.post("/api/subscribers", (req, res) => {
+  const newSubscriber = req.body;
+  res
+    .status(201)
+    .json({ message: "Subscriber created successfully", data: newSubscriber });
+});
 
 // /api/subscribers - GET
 
@@ -31,3 +46,6 @@ const port = process.env.port || 3000;
 // produkter
 // nyhetsbrev
 // kampanjer
+app.listen(port, () => {
+  console.log(`redo på http://localhost:${port}`);
+});

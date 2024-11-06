@@ -1,9 +1,14 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+interface DummyData {
+  getDummy: string;
+}
 
 function App() {
   const [heartVisible, setHeartVisible] = useState(false);
   const [heartPosition, setHeartPosition] = useState({ x: 0, y: 0 });
+  const [dummyData, setDummyData] = useState<DummyData | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLHeadingElement>) => {
     const { clientX, clientY } = event;
@@ -15,11 +20,12 @@ function App() {
   };
   const API_URL = "http://localhost:3000";
 
-  const getDummy = () =>
+  useEffect(() => {
     axios.get(`${API_URL}/dummy`).then((response) => {
+      setDummyData(response.data);
       console.log(response.data);
     });
-  getDummy();
+  }, []);
 
   return (
     <div className="flex items-center justify-center h-screen relative">
@@ -29,6 +35,9 @@ function App() {
       >
         CRM System
       </h1>
+      {/* <div>{getDummy}</div> */}
+
+      <div>{dummyData ? dummyData.getDummy : "Loading data..."}</div>
 
       {heartVisible && (
         <div
@@ -44,3 +53,5 @@ function App() {
 }
 
 export default App;
+
+// const getDummy = (myTs) =>

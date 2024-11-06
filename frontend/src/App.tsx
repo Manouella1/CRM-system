@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 function App() {
@@ -12,6 +13,13 @@ function App() {
     // Dölj hjärtat efter animationens slut
     setTimeout(() => setHeartVisible(false), 1000);
   };
+  const API_URL = "http://localhost:3000";
+
+  const getDummy = () =>
+    axios.get(`${API_URL}/dummy`).then((response) => {
+      console.log(response.data);
+    });
+  getDummy();
 
   return (
     <div className="flex items-center justify-center h-screen relative">

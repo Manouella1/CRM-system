@@ -31,11 +31,16 @@ app.post("/api/subscribers", (req, res) => {
     .json({ message: "Subscriber created successfully", data: newSubscriber });
 });
 
-// /api/subscribers - GET
+// /api/customers - GET
+app.get("/customers", (req, res) => {
+  console.log(dummy);
 
-// /api/subscribers/:id - PUT
+  res.json(dummy);
+});
 
-// /api/subscribers/:id - DELETE
+// /api/customers/:id - PUT
+
+// /api/customers/:id - DELETE
 
 // jag skickar upp detta senare ikväll
 

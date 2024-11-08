@@ -6,13 +6,6 @@ import { DummyData, CustomerData } from "./types";
 // import Home from "";
 // import About from "./components/About";
 
-// interface DummyData {
-//   getDummy: string;
-// }
-// interface CustomerData {
-//   getCustomerData: string;
-// }
-
 function App() {
   const [heartVisible, setHeartVisible] = useState(false);
   const [heartPosition, setHeartPosition] = useState({ x: 0, y: 0 });

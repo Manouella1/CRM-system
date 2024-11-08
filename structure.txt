@@ -1,0 +1,40 @@
+.
+├── Databas-planering.md
+├── backend
+│   ├── customer.json
+│   ├── dummy.json
+│   ├── index.js
+│   ├── package-lock.json
+│   └── package.json
+├── frontend
+│   ├── README.md
+│   ├── components
+│   │   ├── About.jsx
+│   │   └── Home.jsx
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   └── vite.svg
+│   ├── src
+│   │   ├── App.tsx
+│   │   ├── assets
+│   │   │   └── react.svg
+│   │   ├── index.css
+│   │   ├── main.tsx
+│   │   ├── pages
+│   │   │   ├── CustomerPage.tsx
+│   │   │   └── login.ts
+│   │   ├── types.ts
+│   │   └── vite-env.d.ts
+│   ├── tailwind.config.js
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+├── postgres.sql
+└── structure.txt
+
+8 directories, 30 files

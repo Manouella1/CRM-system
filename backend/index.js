@@ -38,19 +38,6 @@ app.get("/api/customers", (req, res) => {
   res.json(customers);
 });
 
-// /api/customers/:id - PUT
-
-// /api/customers/:id - DELETE
-
-// jag skickar upp detta senare ikväll
-
-// tabeller
-
-// kunder  - Jonas
-// orderhistorik
-// produkter
-// nyhetsbrev
-// kampanjer
 app.listen(port, () => {
   console.log(`redo på http://localhost:${port}`);
 });

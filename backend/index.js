@@ -4,9 +4,10 @@ const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const dummy = require("./dummy.json");
+const customers = require("./customer.json");
 
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -32,10 +33,9 @@ app.post("/api/subscribers", (req, res) => {
 });
 
 // /api/customers - GET
-app.get("/customers", (req, res) => {
-  console.log(dummy);
-
-  res.json(dummy);
+app.get("/api/customers", (req, res) => {
+  console.log(customers);
+  res.json(customers);
 });
 
 // /api/customers/:id - PUT

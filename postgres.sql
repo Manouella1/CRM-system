@@ -13,8 +13,6 @@ DROP TABLE IF EXISTS tag CASCADE;
 
 DROP TABLE IF EXISTS company CASCADE;
 
-DROP TABLE IF EXISTS tag CASCADE;
-
 -- 1. Skapa Company-tabellen
 CREATE TABLE
     company (

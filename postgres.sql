@@ -35,7 +35,7 @@ CREATE TABLE
 
 -- 3. Skapa Tag-tabellen
 CREATE TABLE
-    cag (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL);
+    tag (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL);
 
 -- 4. Skapa Contact_Log-tabellen.
 CREATE TABLE

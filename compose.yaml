@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: backend
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      - PGURI=${PGURI}
+    ports:
+      - "3000:3000"
+  database:
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    healthcheck:
+      interval: 1s
+      test: "pg_isready --username=postgres"
+    image: postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data

@@ -20,6 +20,8 @@ const CompanyPage: React.FC = () => {
       }
     };
 
+    // Kontrollerad 23:31
+
     fetchCompany();
   }, []);
 

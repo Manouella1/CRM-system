@@ -24,3 +24,5 @@ export interface Company {
 }
 
 export type CompanyData = Company[];
+
+// kontrollerad 23:32

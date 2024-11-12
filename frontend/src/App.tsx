@@ -4,6 +4,7 @@ import { DummyData, CustomerData } from "./types";
 // import { Customer } from ".types"
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CustomerPage from "./pages/CustomerPage";
+import CompanyPage from "./pages/CompanyPage";
 // import Home from "./components/Home";
 // import About from "./components/About";
 
@@ -49,6 +50,9 @@ function App() {
         <Link className="text-blue-500 hover:underline" to="/customers">
           Customers
         </Link>
+        <Link className="text-blue-500 hover:underline" to="/companies">
+          Companies
+        </Link>
         <Link className="text-blue-500 hover:underline" to="/about">
           About
         </Link>
@@ -57,6 +61,7 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/customers" element={<CustomerPage />} />
+        <Route path="/companies" element={<CompanyPage />} />
         {/* <Route path="/about" element={<About />} /> */}
       </Routes>
 

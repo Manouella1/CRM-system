@@ -23,6 +23,8 @@ const CustomerPage: React.FC = () => {
     fetchCustomers();
   }, []);
 
+  // kontrollerad 23:31
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Customer List</h1>

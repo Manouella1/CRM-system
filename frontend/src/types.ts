@@ -15,3 +15,14 @@ export interface Customer {
 }
 
 export type CustomerData = Customer[];
+
+export interface Company {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
+
+export type CompanyData = Company[];
+
+// kontrollerad 23:32

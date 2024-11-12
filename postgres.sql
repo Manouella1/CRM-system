@@ -73,3 +73,140 @@ CREATE TABLE
         customer_id INTEGER REFERENCES Customer (id) ON DELETE CASCADE,
         send_status VARCHAR(50)
     );
+
+--- lite test data
+INSERT INTO
+    company (name, email, password)
+VALUES
+    (
+        'Tech Solutions AB',
+        'info@techsolutions.com',
+        'password123'
+    ),
+    (
+        'Future Vision LLC',
+        'contact@futurevision.com',
+        'vision2023'
+    );
+
+INSERT INTO
+    customer (company_id, name, phone, address, email)
+VALUES
+    (
+        1,
+        'Alice Andersson',
+        '0701234567',
+        'Main Street 10, Gothenburg',
+        'alice@example.com'
+    ),
+    (
+        1,
+        'Bob Eriksson',
+        '0709876543',
+        'Second Avenue 5, Stockholm',
+        'bob@example.com'
+    ),
+    (
+        2,
+        'Charlie Svensson',
+        '0731234567',
+        'Third Boulevard 8, Malmo',
+        'charlie@example.com'
+    );
+
+INSERT INTO
+    tag (name)
+VALUES
+    ('VIP'),
+    ('Potential Lead'),
+    ('Recurring Customer');
+
+INSERT INTO
+    contact_log (customer_id, date, type, note)
+VALUES
+    (
+        1,
+        '2024-10-01',
+        'Email',
+        'Sent welcome email to Alice.'
+    ),
+    (
+        2,
+        '2024-10-05',
+        'Phone Call',
+        'Discussed potential collaboration with Bob.'
+    ),
+    (
+        3,
+        '2024-10-10',
+        'Meeting',
+        'Met Charlie to present new offers.'
+    );
+
+INSERT INTO
+    offer (company_id, type, content, send_date)
+VALUES
+    (
+        1,
+        'Discount',
+        'Get 10% off on our new services.',
+        '2024-10-15'
+    ),
+    (
+        2,
+        'Special Offer',
+        'Exclusive deal for returning customers.',
+        '2024-10-20'
+    );
+
+INSERT INTO
+    customer_tag (customer_id, tag_id)
+VALUES
+    (1, 1), -- Alice är VIP
+    (2, 2), -- Bob är potentiell lead
+    (3, 3);
+
+-- Charlie är återkommande kund customer
+INSERT INTO
+    send_log (offer_id, customer_id, send_status)
+VALUES
+    (1, 1, 'Sent'), -- Sent offer 1 to Alice
+    (1, 2, 'Failed'), -- Failed to send offer 1 to Bob
+    (2, 3, 'Sent');
+
+-- Sent offer 2 to Charlie
+-- kolla datan
+SELECT
+    *
+FROM
+    company;
+
+SELECT
+    *
+FROM
+    customer;
+
+SELECT
+    *
+FROM
+    tag;
+
+SELECT
+    *
+FROM
+    contact_log;
+
+SELECT
+    *
+FROM
+    offer;
+
+SELECT
+    *
+FROM
+    customer_tag;
+
+SELECT
+    *
+FROM
+    send_log;

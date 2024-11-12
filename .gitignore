@@ -1,3 +1,4 @@
 data
 .env
 compose.yaml
+backend/dist/

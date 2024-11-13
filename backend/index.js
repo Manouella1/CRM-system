@@ -3,7 +3,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-dotenv.config(); // Ladda miljövariabler från .env-filen
+require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
@@ -138,6 +138,6 @@ app.get("/api/companies", async (req, res) => {
 //   }
 // });
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`redo på http://localhost:${port}`);
 });

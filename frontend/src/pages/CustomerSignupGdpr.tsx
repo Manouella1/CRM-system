@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./CustomerSignup.css";
 
 const CustomerSignup: React.FC = () => {
   const [name, setName] = useState<string>("");

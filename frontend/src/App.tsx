@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CustomerPage from "./pages/CustomerPage";
 import CompanyPage from "./pages/CompanyPage";
 import CustomerSignup from "./pages/CustomerSignupGdpr";
+import Login from "./pages/LoginCompany";
+import Register from "./pages/RegisterCompany";
 // import Home from "./components/Home";
 // import About from "./components/About";
 
@@ -60,7 +62,10 @@ function App() {
           About
         </Link>
         <Link className="text-blue-500 hover:underline" to="/signup">
-          Sign up to newsletter
+          Newsletter
+        </Link>
+        <Link className="text-blue-500 hover:underline" to="/login">
+          Login
         </Link>
       </div>
 
@@ -69,6 +74,8 @@ function App() {
         <Route path="/customers" element={<CustomerPage />} />
         <Route path="/companies" element={<CompanyPage />} />
         <Route path="/signup" element={<CustomerSignup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         {/* <Route path="/about" element={<About />} /> */}
       </Routes>
 

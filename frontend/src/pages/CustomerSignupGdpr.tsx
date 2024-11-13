@@ -152,6 +152,141 @@ const CustomerSignup: React.FC = () => {
 
   return (
     <div className="customer-signup">
+      <style>{`
+        .customer-signup {
+          max-width: 500px;
+          margin: 0 auto;
+          padding: 2rem;
+          background-color: #f9f9f9;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          font-family: Arial, sans-serif;
+          color: #333;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+          color: #007bff;
+          text-align: center;
+          margin-bottom: 1.5rem;
+        }
+
+        form div {
+          margin-bottom: 1rem;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 1rem;
+        }
+
+        .gdpr {
+          display: flex;
+          align-items: center;
+        }
+
+        .gdpr label {
+          margin-left: 0.5rem;
+          font-size: 0.9rem;
+          color: #666;
+        }
+
+        .gdpr button {
+          background: none;
+          border: none;
+          color: #007bff;
+          cursor: pointer;
+          font-size: 0.9rem;
+          margin-left: 0.5rem;
+          text-decoration: underline;
+        }
+
+        .gdpr button:hover {
+          color: #0056b3;
+        }
+
+        button[type="submit"] {
+          width: 100%;
+          padding: 0.75rem;
+          background-color: #007bff;
+          border: none;
+          border-radius: 4px;
+          color: white;
+          font-size: 1rem;
+          font-weight: bold;
+          cursor: pointer;
+          margin-top: 1rem;
+          transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+          background-color: #0056b3;
+        }
+
+        button[type="submit"]:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+
+        .gdpr-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+        }
+
+        .modal-content {
+          background: white;
+          padding: 2rem;
+          border-radius: 8px;
+          max-width: 500px;
+          width: 90%;
+          text-align: center;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h3 {
+          font-size: 1.25rem;
+          margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+          font-size: 0.95rem;
+          color: #333;
+          margin-bottom: 1.5rem;
+        }
+
+        .modal-content button {
+          padding: 0.5rem 1rem;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 0.95rem;
+          cursor: pointer;
+        }
+
+        .modal-content button:hover {
+          background-color: #0056b3;
+        }
+      `}</style>
+
       <h2>Anmäl dig till våra nyhetserbjudanden</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -210,7 +345,9 @@ const CustomerSignup: React.FC = () => {
             </button>
           </label>
         </div>
-        <button type="submit">Anmäl mig</button>
+        <button type="submit" disabled={!gdprAccepted}>
+          Anmäl mig
+        </button>
       </form>
 
       {/* GDPR Modal */}

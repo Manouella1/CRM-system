@@ -11,9 +11,11 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/login", { email, password });
-      const token = response.data.token; // Anta att token finns i `response.data.token`
-      localStorage.setItem("authToken", token); // Spara token i localStorage
+      const {
+        data: { token },
+      } = await axios.post("/api/login", { email, password });
+      localStorage.setItem("token", token);
+      // Hantera lyckad inloggning, till exempel lagra token i localStorage
       alert("Login successful!");
       navigate("/customers");
     } catch (error) {

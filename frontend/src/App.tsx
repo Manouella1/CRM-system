@@ -8,6 +8,7 @@ import CompanyPage from "./pages/CompanyPage";
 import CustomerSignup from "./pages/CustomerSignupGdpr";
 import Login from "./pages/LoginCompany";
 import Register from "./pages/RegisterCompany";
+import NewsletterPage from "./pages/CreateNewsletter";
 // import Home from "./components/Home";
 // import About from "./components/About";
 
@@ -67,6 +68,9 @@ function App() {
         <Link className="text-blue-500 hover:underline" to="/login">
           Login
         </Link>
+        <Link className="text-blue-500 hover:underline" to="/create-newsletter">
+          Create news letter
+        </Link>
       </div>
 
       <Routes>
@@ -76,6 +80,7 @@ function App() {
         <Route path="/signup" element={<CustomerSignup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/create-newsletter" element={<NewsletterPage />} />
         {/* <Route path="/about" element={<About />} /> */}
       </Routes>
 

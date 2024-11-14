@@ -11,11 +11,14 @@ const Register: React.FC = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/register", {
+      const {
+        data: { token },
+      } = await axios.post("/api/register", {
         companyName,
         email,
         password,
       });
+      localStorage.setItem("token", token);
       alert("Registration successful!");
       navigate("/login");
     } catch (error) {

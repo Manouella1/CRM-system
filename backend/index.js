@@ -123,6 +123,22 @@ app.get("/api/companies", async (req, res) => {
   }
 });
 
+
+app.delete("/api/customers/delete", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const result = await pool.query("DELETE FROM customer WHERE email = $1 RETURNING *", [email]);
+    if (result.rowCount > 0) {
+      res.status(200).send({ message: "Kontot har raderats." });
+    } else {
+      res.status(404).send({ message: "Inget konto hittades med den angivna e-posten." });
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({ message: "Ett serverfel inträffade." });
+  }
+});
+
 // // Skapa en ny post i Company-tabellen
 // app.post("/api/companies", async (req, res) => {
 //   const { name, email, password } = req.body;

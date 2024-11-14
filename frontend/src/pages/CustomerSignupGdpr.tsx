@@ -217,7 +217,7 @@ const CustomerSignup: React.FC = () => {
       {showGdprModal && (
         <div className="gdpr-modal" onClick={() => setShowGdprModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Hur vi behandlar dina personuppgifter</h3>
+            <h3>Hur vi behandlar dina personuppgifter</h3><br />
             <div style={{ maxHeight: "300px", overflowY: "scroll", textAlign: "left" }}>
               <p>Vi samlar in dina personuppgifter för att kunna skicka nyhetserbjudanden och annan relevant information. Dina uppgifter kommer aldrig att delas med tredje part utan ditt uttryckliga medgivande.</p>
               <br />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../style/contactModal.css";
 
-//KONTAKT SIDA och TA BORT KONTO
+//KONTAKT SIDA och TA BORT KONTOT PÅ HEMSIDAN
 
 const CustomerContact: React.FC = () => {
   const [email, setEmail] = useState<string>("");

@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+const nodemailer = require("nodemailer"); //nodemailer för att skicka mail
 const express = require("express");
 const cors = require("cors");
 const dummy = require("./dummy.json");
@@ -121,6 +122,80 @@ app.get("/api/companies", async (req, res) => {
     console.error("Error fetching companies:", error);
     res.status(500).json({ error: "Error fetching companies" });
   }
+});
+
+// Endpoint för att skapa ett nytt nyhetsbrev
+app.post("/api/offers", async (req, res) => {
+  const { company_id, type, content } = req.body;
+
+  try {
+    const result = await pool.query(
+      "INSERT INTO offer (company_id, type, content, send_date) VALUES ($1, $2, $3, CURRENT_DATE) RETURNING *",
+      [company_id, type, content]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error("Error creating offer:", error);
+    res.status(500).json({ message: "Error creating offer" });
+  }
+});
+
+// Endpoint för att skicka nyhetsbrev
+app.post("/api/send-newsletter", async (req, res) => {
+  const { offer_id, customer_ids } = req.body;
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const offerResult = await pool.query("SELECT * FROM offer WHERE id = $1", [
+      offer_id,
+    ]);
+    const offer = offerResult.rows[0];
+
+    for (const customer_id of customer_ids) {
+      const customerResult = await pool.query(
+        "SELECT * FROM customer WHERE id = $1",
+        [customer_id]
+      );
+      const customer = customerResult.rows[0];
+
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: customer.email,
+        subject: offer.type,
+        text: offer.content,
+      };
+
+      try {
+        await transporter.sendMail(mailOptions);
+        await pool.query(
+          "INSERT INTO send_log (offer_id, customer_id, send_status) VALUES ($1, $2, $3)",
+          [offer_id, customer_id, "Sent"]
+        );
+      } catch (mailError) {
+        console.error(`Failed to send email to ${customer.email}:`, mailError);
+        await pool.query(
+          "INSERT INTO send_log (offer_id, customer_id, send_status) VALUES ($1, $2, $3)",
+          [offer_id, customer_id, "Failed"]
+        );
+      }
+    }
+
+    res.status(200).json({ message: "Newsletter sent" });
+  } catch (error) {
+    console.error("Error sending newsletter:", error);
+    res.status(500).json({ message: "Error sending newsletter" });
+  }
+});
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
 });
 
 // // Skapa en ny post i Company-tabellen

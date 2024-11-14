@@ -26,7 +26,6 @@ const Register: React.FC = () => {
       alert("Registration failed");
     }
   };
-
   return (
     <div className="register-container">
       <style>{`

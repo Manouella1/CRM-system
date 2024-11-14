@@ -44,7 +44,7 @@ const NewsletterPage: React.FC = () => {
   const handleSelectAll = () => {
     setSelectAll(!selectAll);
     setSelectedCustomers(
-      selectAll ? [] : customerData.map((customer) => customer.id)
+      selectAll ? [] : customerData.map((customer) => customer.id.toString())
     );
   };
 
@@ -104,8 +104,8 @@ const NewsletterPage: React.FC = () => {
             <div key={customer.id} className="border p-4 rounded shadow">
               <input
                 type="checkbox"
-                checked={selectedCustomers.includes(customer.id)}
-                onChange={() => handleSelectCustomer(customer.id)}
+                checked={selectedCustomers.includes(customer.id.toString())}
+                onChange={() => handleSelectCustomer(customer.id.toString())}
               />
               <span className="ml-2">
                 <strong>{customer.name}</strong> - {customer.email}

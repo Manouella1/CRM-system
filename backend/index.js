@@ -124,6 +124,24 @@ app.get("/api/companies", async (req, res) => {
   }
 });
 
+
+
+app.delete("/api/customers/delete", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const result = await pool.query("DELETE FROM customer WHERE email = $1 RETURNING *", [email]);
+    if (result.rowCount > 0) {
+      res.status(200).send({ message: "Kontot har raderats." });
+    } else {
+      res.status(404).send({ message: "Inget konto hittades med den angivna e-posten." });
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({ message: "Ett serverfel inträffade." });
+  }
+});
+
+
 // Endpoint för att skapa ett nytt nyhetsbrev
 app.post("/api/offers", async (req, res) => {
   const { company_id, type, content } = req.body;
@@ -197,6 +215,7 @@ app.post("/api/send-newsletter", async (req, res) => {
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
+
 
 // // Skapa en ny post i Company-tabellen
 // app.post("/api/companies", async (req, res) => {

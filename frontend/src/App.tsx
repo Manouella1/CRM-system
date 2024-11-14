@@ -6,9 +6,11 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CustomerPage from "./pages/CustomerPage";
 import CompanyPage from "./pages/CompanyPage";
 import CustomerSignup from "./pages/CustomerSignupGdpr";
+import CustomerContact from './pages/CustomerContact';
 import Login from "./pages/LoginCompany";
 import Register from "./pages/RegisterCompany";
 import NewsletterPage from "./pages/CreateNewsletter";
+
 // import Home from "./components/Home";
 // import About from "./components/About";
 
@@ -71,6 +73,9 @@ function App() {
         <Link className="text-blue-500 hover:underline" to="/create-newsletter">
           Create news letter
         </Link>
+        <Link className="text-blue-500 hover:underline" to="/contact">
+          Contact
+        </Link>
       </div>
 
       <Routes>
@@ -78,6 +83,7 @@ function App() {
         <Route path="/customers" element={<CustomerPage />} />
         <Route path="/companies" element={<CompanyPage />} />
         <Route path="/signup" element={<CustomerSignup />} />
+        <Route path="/contact" element={<CustomerContact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/create-newsletter" element={<NewsletterPage />} />

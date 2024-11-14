@@ -1,0 +1,13 @@
+.contact-container {
+  padding: 20px;
+}
+
+.contact-section, .delete-section {
+  margin-bottom: 40px;
+}
+
+.description {
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 14px;
+}

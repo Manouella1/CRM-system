@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 const Register: React.FC = () => {
-  const [companyName, setCompanyName] = useState("");
+  const [name, setCompanyName] = useState<string>("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -11,21 +11,26 @@ const Register: React.FC = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const {
-        data: { token },
-      } = await axios.post("/api/register", {
-        companyName,
+      const response = await axios.post("/api/register", {
+        name,
         email,
         password,
       });
-      localStorage.setItem("token", token);
-      alert("Registration successful!");
+      const message = response.data.message || "Registration successful!";
+      alert(message);
       navigate("/login");
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        // Om error är ett AxiosError, kan vi komma åt `response`-data
+        alert(error.response?.data?.error || "Registration failed");
+      } else {
+        // Om det är något annat fel, visa ett generellt meddelande
+        alert("An unexpected error occurred");
+      }
       console.error("Error registering:", error);
-      alert("Registration failed");
     }
   };
+
   return (
     <div className="register-container">
       <style>{`
@@ -115,7 +120,7 @@ const Register: React.FC = () => {
           <label>Company Name</label>
           <input
             type="text"
-            value={companyName}
+            value={name}
             onChange={(e) => setCompanyName(e.target.value)}
             required
           />

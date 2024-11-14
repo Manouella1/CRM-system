@@ -11,7 +11,7 @@ const Register: React.FC = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/register", {
+      await axios.post("/api/register", {
         companyName,
         email,
         password,
@@ -23,7 +23,6 @@ const Register: React.FC = () => {
       alert("Registration failed");
     }
   };
-
   return (
     <div className="register-container">
       <style>{`

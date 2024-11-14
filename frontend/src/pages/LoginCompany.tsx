@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+declare const alert: (message?: unknown) => void;
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -12,15 +12,15 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/login", { email, password });
-      // Hantera lyckad inloggning, till exempel lagra token i localStorage
+      const token = response.data.token; // Anta att token finns i `response.data.token`
+      localStorage.setItem("authToken", token); // Spara token i localStorage
       alert("Login successful!");
-      navigate("/customers"); // Ändra till din skyddade sida
+      navigate("/customers");
     } catch (error) {
       console.error("Error logging in:", error);
       alert("Login failed");
     }
   };
-
   return (
     <div className="login-container">
       <style>{`

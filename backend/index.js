@@ -212,7 +212,3 @@ app.listen(3000, () => {
 //     res.status(500).json({ error: "Error inserting company" });
 //   }
 // });
-
-app.listen(port, "0.0.0.0", () => {
-  console.log(`redo på http://localhost:${port}`);
-});

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Customer } from "../types";
 
-const API_URL = "http://localhost:3000";
+//const API_URL = "http://localhost:3000";
 
 const CustomerPage: React.FC = () => {
   const [customerData, setCustomerData] = useState<Customer[]>([]);
@@ -11,7 +11,7 @@ const CustomerPage: React.FC = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/customers`);
+        const response = await axios.get('/api/customers');
         setCustomerData(response.data);
       } catch (error) {
         console.error("Error fetching customer data:", error);

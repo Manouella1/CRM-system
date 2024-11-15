@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import { Customer } from "../types";
 
-const API_URL = "http://localhost:3000";
+//const API_URL = "http://localhost:3000";
 
 const NewsletterPage: React.FC = () => {
   const [customerData, setCustomerData] = useState<Customer[]>([]);
@@ -15,7 +15,7 @@ const NewsletterPage: React.FC = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/customers`);
+        const response = await axios.get('/api/customers');
         setCustomerData(response.data);
       } catch (error) {
         console.error("Error fetching customer data:", error);
@@ -60,7 +60,7 @@ const NewsletterPage: React.FC = () => {
     formData.append("recipients", JSON.stringify(selectedCustomers));
 
     try {
-      await axios.post(`${API_URL}/api/newsletters`, formData, {
+      await axios.post('/api/newsletters', formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

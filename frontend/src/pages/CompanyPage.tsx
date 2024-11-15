@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Company } from "../types";
 
-//const API_URL = "http://localhost:3000";
 
 const CompanyPage: React.FC = () => {
   const [companyData, setCompanyData] = useState<Company[]>([]);
@@ -19,8 +18,6 @@ const CompanyPage: React.FC = () => {
         setLoading(false);
       }
     };
-
-    // Kontrollerad 23:31
 
     fetchCompany();
   }, []);

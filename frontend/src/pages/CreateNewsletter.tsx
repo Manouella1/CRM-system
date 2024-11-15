@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import { Customer } from "../types";
-
+import imageCompression from "browser-image-compression";
 //const API_URL = "http://localhost:3000";
 
 const NewsletterPage: React.FC = () => {
@@ -15,7 +15,7 @@ const NewsletterPage: React.FC = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await axios.get('/api/customers');
+        const response = await axios.get("/api/customers");
         setCustomerData(response.data);
       } catch (error) {
         console.error("Error fetching customer data:", error);
@@ -27,9 +27,12 @@ const NewsletterPage: React.FC = () => {
     fetchCustomers();
   }, []);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setNewsletterImage(e.target.files[0]);
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const options = { maxSizeMB: 1, maxWidthOrHeight: 1920 };
+      const compressedFile = await imageCompression(file, options);
+      setNewsletterImage(compressedFile); // åtkomst till setNewsletterImage
     }
   };
 
@@ -60,7 +63,7 @@ const NewsletterPage: React.FC = () => {
     formData.append("recipients", JSON.stringify(selectedCustomers));
 
     try {
-      await axios.post('/api/newsletters', formData, {
+      await axios.post("/api/newsletters", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

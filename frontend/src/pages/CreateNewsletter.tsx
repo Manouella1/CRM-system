@@ -15,7 +15,7 @@ const NewsletterPage: React.FC = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/customers`);
+        const response = await axios.get(`/api/customers`);
         setCustomerData(response.data);
       } catch (error) {
         console.error("Error fetching customer data:", error);

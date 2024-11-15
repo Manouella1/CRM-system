@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CustomerPage from "./pages/CustomerPage";
 import CompanyPage from "./pages/CompanyPage";
 import CustomerSignup from "./pages/CustomerSignupGdpr";
-import CustomerContact from './pages/CustomerContact';
+import CustomerContact from "./pages/CustomerContact";
 import Login from "./pages/LoginCompany";
 import Register from "./pages/RegisterCompany";
 import NewsletterPage from "./pages/CreateNewsletter";
@@ -39,7 +39,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/api/customers`)
+      .get(`/api/customers`)
       .then((response) => {
         setCustomerData(response.data);
         console.log("setCustomerData", response.data);

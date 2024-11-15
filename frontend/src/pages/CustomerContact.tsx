@@ -10,12 +10,12 @@ const CustomerContact: React.FC = () => {
   const [isContactModalVisible, setIsContactModalVisible] = useState<boolean>(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState<boolean>(false);
 
-  const API_URL = "http://localhost:3000";
+  //const API_URL = "http://localhost:3000";
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/api/contact`, { email, message });
+      const response = await axios.post('/api/contact', { email, message });
       if (response.status === 200) {
         alert("Ditt meddelande har skickats!");
         setIsContactModalVisible(false);
@@ -31,7 +31,7 @@ const CustomerContact: React.FC = () => {
   const handleDeleteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.delete(`${API_URL}/api/customers/delete`, {
+      const response = await axios.delete('/api/customers/delete', {
         data: { email },
       });
       if (response.status === 200) {

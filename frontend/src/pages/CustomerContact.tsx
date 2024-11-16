@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import axios from "axios";
 import "../style/contactModal.css";
 
-//KONTAKT SIDA och TA BORT KONTOT PÅ HEMSIDAN
-
-const CustomerContact: React.FC = () => {
+// Memo för att undvika onödiga omrenderingar
+const CustomerContact: React.FC = React.memo(() => {
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [isContactModalVisible, setIsContactModalVisible] = useState<boolean>(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState<boolean>(false);
 
-  //const API_URL = "http://localhost:3000";
-
-  const handleContactSubmit = async (e: React.FormEvent) => {
+  // Stoppa så att det skapas nytt vid varje render
+  const handleContactSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await axios.post('/api/contact', { email, message });
@@ -26,9 +24,9 @@ const CustomerContact: React.FC = () => {
       console.error("Fel vid skickande av meddelande:", error);
       alert("Ett fel inträffade. Försök igen senare.");
     }
-  };
+  }, [email, message]);
 
-  const handleDeleteSubmit = async (e: React.FormEvent) => {
+  const handleDeleteSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await axios.delete('/api/customers/delete', {
@@ -45,12 +43,12 @@ const CustomerContact: React.FC = () => {
       console.error("Error:", error);
       alert("Ett fel inträffade vid radering. Försök igen senare.");
     }
-  };
+  }, [email]);
 
   return (
     <div className="contact-container">
       <h2>Kontaktformulär</h2>
-      <p className="description">Om du har några frågor, funderingar eller behöver hjälp med något som rör vår hemsida, tveka inte att kontakta oss. Vi strävar efter att ge dig den bästa möjliga servicen och svarar gärna på dina frågor. Fyll i formuläret nedan med din e-post och ditt meddelande, så återkommer vi till dig så snart vi kan. </p>
+      <p className="description">Om du har några frågor, funderingar eller behöver hjälp med något som rör vår hemsida, tveka inte att kontakta oss. Vi strävar efter att ge dig den bästa möjliga servicen och svarar gärna på dina frågor. Fyll i formuläret nedan med din e-post och ditt meddelande, så återkommer vi till dig så snart vi kan.</p>
       <div className="contact-section" style={{ marginBottom: "20px" }}>
         <button onClick={() => setIsContactModalVisible(true)} style={{ marginBottom: "10px" }}>
           Skicka Meddelande
@@ -88,7 +86,7 @@ const CustomerContact: React.FC = () => {
       </div>
 
       <h2>Ta bort konto</h2>
-      <p className="description">Om du vill radera ditt konto, vänligen fyll i din e-postadress i formuläret nedan. Observera att radering av kontot innebär att all din data kommer att tas bort permanent och inte kan återställas. Tack för att du har varit en del av vår plattform</p>
+      <p className="description">Om du vill radera ditt konto, vänligen fyll i din e-postadress i formuläret nedan. Observera att radering av kontot innebär att all din data kommer att tas bort permanent och inte kan återställas. Tack för att du har varit en del av vår plattform.</p>
       <div className="delete-section" style={{ marginBottom: "20px" }}>
         <button onClick={() => setIsDeleteModalVisible(true)} style={{ marginBottom: "10px" }}>
           Radera Konto
@@ -117,6 +115,6 @@ const CustomerContact: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default CustomerContact;

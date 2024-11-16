@@ -7,12 +7,13 @@ import { Customer } from "../types";
 const CustomerPage: React.FC = () => {
   const [customerData, setCustomerData] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await axios.get('/api/customers');
-        setCustomerData(response.data);
+        const response = await axios.get(`/api/customers?page=${page}`);
+        setCustomerData((prevData) => [...prevData, ...response.data]);
       } catch (error) {
         console.error("Error fetching customer data:", error);
       } finally {
@@ -21,7 +22,7 @@ const CustomerPage: React.FC = () => {
     };
 
     fetchCustomers();
-  }, []);
+  }, [page]);
 
   // kontrollerad 23:31
 
@@ -56,6 +57,14 @@ const CustomerPage: React.FC = () => {
             <p>No customers available.</p>
           )}
         </div>
+      )}
+      {!loading && (
+        <button
+          onClick={() => setPage((prevPage) => prevPage + 1)}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Nästa sida
+        </button>
       )}
     </div>
   );

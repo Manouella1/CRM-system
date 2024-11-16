@@ -6,6 +6,10 @@ declare const alert: (message?: unknown) => void;
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -130,6 +134,68 @@ const Login: React.FC = () => {
       <p>
         Don&apos;t have an account? <Link to="/register">Register here</Link>
       </p>
+      <p className="mt-4 text-sm text-gray-600 text-center">
+        Genom att logga in godkänner du att vi hanterar dina personuppgifter
+        enligt vår{" "}
+        <span
+          onClick={openModal}
+          className="text-blue-500 hover:underline cursor-pointer"
+        >
+          integritetspolicy
+        </span>
+        .
+      </p>
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
+            <h3 className="text-xl font-semibold mb-4">
+              Hur vi behandlar dina personuppgifter
+            </h3>
+            <div className="max-h-96 overflow-y-auto text-left">
+              <p className="mb-4">
+                Vi samlar in dina personuppgifter för att kunna skicka
+                nyhetserbjudanden och annan relevant information. Dina uppgifter
+                kommer aldrig att delas med tredje part utan ditt uttryckliga
+                medgivande.
+              </p>
+              <h4 className="font-medium mb-2">
+                GDPR-Integritetspolicy och Samtycke
+              </h4>
+              <p className="mb-4">
+                Läs vår fullständiga{" "}
+                <a
+                  href="/gdpr-policy" // Länk till GDPR-policyn här
+                  className="text-blue-500 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  integritetspolicy
+                </a>
+                för mer information.
+              </p>
+              <ol className="list-decimal pl-5 space-y-2">
+                <li>Vi samlar in namn, e-postadress och telefonnummer.</li>
+                <li>
+                  Vi kommer endast att använda dina uppgifter för att skicka
+                  relevant information om våra tjänster.
+                </li>
+                <li>
+                  Du har rätt att när som helst begära att dina personuppgifter
+                  tas bort eller ändras.
+                </li>
+              </ol>
+            </div>
+            <div className="mt-4 flex justify-end">
+              <button
+                onClick={closeModal}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+              >
+                Stäng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

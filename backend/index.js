@@ -56,6 +56,24 @@ app.get("/api/customers", async (req, res) => {
   console.log(customers);
 });
 
+// Endpoint för att exportera kunddata (dataportabilitet)
+app.get("/api/customers/export", async (req, res) => {
+  const { email } = req.query; // Använd query-param för att få kundens e-post
+  try {
+    const result = await pool.query("SELECT * FROM customer WHERE email = $1", [
+      email,
+    ]);
+    if (result.rows.length > 0) {
+      res.json(result.rows[0]); // Returnerar kundens data
+    } else {
+      res.status(404).json({ message: "Customer not found" });
+    }
+  } catch (error) {
+    console.error("Error exporting customer data:", error);
+    res.status(500).json({ error: "Error exporting customer data" });
+  }
+});
+
 // /api/customers - POST
 app.post("/api/customers", async (req, res) => {
   const { company_id, name, phone, address, email } = req.body;
@@ -124,23 +142,25 @@ app.get("/api/companies", async (req, res) => {
   }
 });
 
-
-
 app.delete("/api/customers/delete", async (req, res) => {
   const { email } = req.body;
   try {
-    const result = await pool.query("DELETE FROM customer WHERE email = $1 RETURNING *", [email]);
+    const result = await pool.query(
+      "DELETE FROM customer WHERE email = $1 RETURNING *",
+      [email]
+    );
     if (result.rowCount > 0) {
       res.status(200).send({ message: "Kontot har raderats." });
     } else {
-      res.status(404).send({ message: "Inget konto hittades med den angivna e-posten." });
+      res
+        .status(404)
+        .send({ message: "Inget konto hittades med den angivna e-posten." });
     }
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send({ message: "Ett serverfel inträffade." });
   }
 });
-
 
 // Endpoint för att skapa ett nytt nyhetsbrev
 app.post("/api/offers", async (req, res) => {
@@ -215,7 +235,6 @@ app.post("/api/send-newsletter", async (req, res) => {
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
-
 
 // // Skapa en ny post i Company-tabellen
 // app.post("/api/companies", async (req, res) => {

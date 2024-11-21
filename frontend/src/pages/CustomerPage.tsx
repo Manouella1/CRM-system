@@ -28,7 +28,7 @@ const CustomerPage: React.FC = () => {
   const [customerData, setCustomerData] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [exportData, setExportData] = useState<any | null>(null);
+  const [exportData, setExportData] = useState(null);
   const [exportEmail, setExportEmail] = useState(""); // Ändrat från email till exportEmail
   const [error, setError] = useState("");
 
@@ -122,21 +122,3 @@ const CustomerPage: React.FC = () => {
 };
 
 export default CustomerPage;
-
-// className="border p-4 rounded shadow">
-//   <p>
-//     <strong>Company ID:</strong> {customer.company_id}
-//   </p>
-//   <p>
-//     <strong>Name:</strong> {customer.name}
-//   </p>
-//   <p>
-//     <strong>Phone:</strong> {customer.phone}
-//   </p>
-//   <p>
-//     <strong>Address:</strong> {customer.address}
-//   </p>
-//   <p>
-//     <strong>Email:</strong> {customer.email}
-//   </p>
-// </div>

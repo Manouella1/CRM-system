@@ -2,7 +2,6 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import { Customer } from "../types";
 import imageCompression from "browser-image-compression";
-//const API_URL = "http://localhost:3000";
 
 const NewsletterPage: React.FC = () => {
   const [customerData, setCustomerData] = useState<Customer[]>([]);

@@ -1,9 +1,3 @@
-export interface DummyData {
-  id: number;
-  name: string;
-  nyhetsbrev: boolean;
-  betalat: boolean;
-}
 
 export interface Customer {
   id: number;
@@ -25,5 +19,3 @@ export interface Company {
 
 export type CompanyData = Company[];
 
-
-// kontrollerad 23:32

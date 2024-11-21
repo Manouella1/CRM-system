@@ -1,4 +1,3 @@
-//import axios from "axios";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CustomerPage from "./pages/CustomerPage";
@@ -8,12 +7,10 @@ import CustomerContact from "./pages/CustomerContact";
 import Login from "./pages/LoginCompany";
 import Register from "./pages/RegisterCompany";
 import NewsletterPage from "./pages/CreateNewsletter";
-//import { CustomerData } from "./types";
 
 function App() {
   const [heartVisible, setHeartVisible] = useState(false);
   const [heartPosition, setHeartPosition] = useState({ x: 0, y: 0 });
-  //const [customerData, setCustomerData] = useState<CustomerData>([]);
 
   const handleClick = (event: React.MouseEvent<HTMLHeadingElement>) => {
     const { clientX, clientY } = event;
@@ -23,16 +20,6 @@ function App() {
     // Dölj hjärtat efter animationens slut
     setTimeout(() => setHeartVisible(false), 1000);
   };
-
-/*   useEffect(() => {
-    axios
-      .get("/api/customers")
-      .then((response) => {
-        setCustomerData(response.data);
-        console.log("setCustomerData", response.data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []); */
 
   return (
     <Router>
@@ -104,23 +91,6 @@ function App() {
         >
           CRM System
         </h1>
-        {/* <div className="absolute right-10 top-1/4 border border-gray-400 p-4 rounded-lg bg-white shadow-lg w-1/3">
-          <h2 className="text-lg font-semibold mt-4 mb-2">Customer Data:</h2>
-          {customerData.length > 0 ? (
-            customerData.map((customer) => (
-              <div key={customer.id} className="mb-2">
-                <p>Company ID: {customer.company_id}</p>
-                <p>Name: {customer.name}</p>
-                <p>Phone: {customer.phone}</p>
-                <p>Address: {customer.address}</p>
-                <p>Email: {customer.email}</p>
-              </div>
-            ))
-          ) : (
-            <p>Loading customer data...</p>
-          )}
-        </div> */}
-
         {heartVisible && (
           <div
             key={Math.random()}

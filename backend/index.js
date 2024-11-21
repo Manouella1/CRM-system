@@ -1,4 +1,3 @@
-// diverse importer
 const path = require("path");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
@@ -7,6 +6,8 @@ require("dotenv").config();
 const nodemailer = require("nodemailer"); //nodemailer för att skicka mail
 const express = require("express");
 const cors = require("cors");
+const customers = require("./customer.json");
+
 const { Pool } = require("pg");
 
 const app = express();
@@ -21,7 +22,7 @@ const pool = new Pool({
   connectionString: process.env.PGURI,
 });
 
-// edpoints
+// rensat
 
 app.get("/", (req, res) => {
   res.send({ hello: " World!" });

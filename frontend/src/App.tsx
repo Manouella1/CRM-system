@@ -1,7 +1,5 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-//import { DummyData, CustomerData } from "./types";
-// import { Customer } from ".types"
+//import axios from "axios";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CustomerPage from "./pages/CustomerPage";
 import CompanyPage from "./pages/CompanyPage";
@@ -10,16 +8,12 @@ import CustomerContact from "./pages/CustomerContact";
 import Login from "./pages/LoginCompany";
 import Register from "./pages/RegisterCompany";
 import NewsletterPage from "./pages/CreateNewsletter";
-import { CustomerData } from "./types";
-
-// import Home from "./components/Home";
-// import About from "./components/About";
+//import { CustomerData } from "./types";
 
 function App() {
   const [heartVisible, setHeartVisible] = useState(false);
   const [heartPosition, setHeartPosition] = useState({ x: 0, y: 0 });
-  //const [dummyData, setDummyData] = useState<DummyData[]>([]);
-  const [customerData, setCustomerData] = useState<CustomerData>([]);
+  //const [customerData, setCustomerData] = useState<CustomerData>([]);
 
   const handleClick = (event: React.MouseEvent<HTMLHeadingElement>) => {
     const { clientX, clientY } = event;
@@ -29,16 +23,8 @@ function App() {
     // Dölj hjärtat efter animationens slut
     setTimeout(() => setHeartVisible(false), 1000);
   };
-  /*   const API_URL = "http://localhost:3000";
 
-  useEffect(() => {
-    axios.get(`${API_URL}/dummy`).then((response) => {
-      setDummyData(response.data);
-      console.log(response.data);
-    });
-  }, []); */
-
-  useEffect(() => {
+/*   useEffect(() => {
     axios
       .get("/api/customers")
       .then((response) => {
@@ -46,41 +32,62 @@ function App() {
         console.log("setCustomerData", response.data);
       })
       .catch((error) => console.error("Error fetching data:", error));
-  }, []);
-
-  // kontrollerad 23:32
+  }, []); */
 
   return (
     <Router>
-      <div className="flex justify-center space-x-4 p-4">
-        <Link className="text-blue-500 hover:underline" to="/">
+      <div className="flex flex-wrap justify-center gap-2 p-4">
+        <Link
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition"
+          to="/"
+        >
           Home
         </Link>
-        <Link className="text-blue-500 hover:underline" to="/customers">
+        <Link
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition"
+          to="/customers"
+        >
           Customers
         </Link>
-        <Link className="text-blue-500 hover:underline" to="/companies">
+        <Link
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition"
+          to="/companies"
+        >
           Companies
         </Link>
-        <Link className="text-blue-500 hover:underline" to="/about">
+        <Link
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition"
+          to="/about"
+        >
           About
         </Link>
-        <Link className="text-blue-500 hover:underline" to="/signup">
+        <Link
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition"
+          to="/signup"
+        >
           Newsletter
         </Link>
-        <Link className="text-blue-500 hover:underline" to="/login">
+        <Link
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition"
+          to="/login"
+        >
           Login
         </Link>
-        <Link className="text-blue-500 hover:underline" to="/create-newsletter">
+        <Link
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition"
+          to="/create-newsletter"
+        >
           Create news letter
         </Link>
-        <Link className="text-blue-500 hover:underline" to="/contact">
+        <Link
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition"
+          to="/contact"
+        >
           Contact
         </Link>
       </div>
 
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/customers" element={<CustomerPage />} />
         <Route path="/companies" element={<CompanyPage />} />
         <Route path="/signup" element={<CustomerSignup />} />
@@ -88,7 +95,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/create-newsletter" element={<NewsletterPage />} />
-        {/* <Route path="/about" element={<About />} /> */}
       </Routes>
 
       <div className="flex items-center justify-center h-screen relative">
@@ -98,21 +104,7 @@ function App() {
         >
           CRM System
         </h1>
-        {/* <div>{getDummy}</div> */}
-        <div className="absolute right-10 top-1/4 border border-gray-400 p-4 rounded-lg bg-white shadow-lg w-1/3">
-          {/* <h2 className="text-lg font-semibold mb-2">Dummy Data:</h2>
-          {dummyData.length > 0 ? (
-            dummyData.map((item) => (
-              <div key={item.id} className="mb-2">
-                <p>Name: {item.name}</p>
-                <p>Nyhetsbrev: {item.nyhetsbrev ? "Yes" : "No"}</p>
-                <p>Betalat: {item.betalat ? "Yes" : "No"}</p>
-              </div>
-            ))
-          ) : (
-            <p>Loading dummy data...</p>
-          )} */}
-
+        {/* <div className="absolute right-10 top-1/4 border border-gray-400 p-4 rounded-lg bg-white shadow-lg w-1/3">
           <h2 className="text-lg font-semibold mt-4 mb-2">Customer Data:</h2>
           {customerData.length > 0 ? (
             customerData.map((customer) => (
@@ -127,12 +119,7 @@ function App() {
           ) : (
             <p>Loading customer data...</p>
           )}
-        </div>
-
-        {/* <div>{dummyData ? dummyData.getDummy : "Loading data..."}</div>
-      <div>
-        {customerData ? customerData.getCustomerData : "Loading data..."}
-      </div> */}
+        </div> */}
 
         {heartVisible && (
           <div
@@ -149,27 +136,3 @@ function App() {
 }
 
 export default App;
-
-// import React from "react";
-
-// function App() {
-//   return (
-//     <Router>
-//       <nav className="flex justify-center space-x-4 p-4">
-//         <Link className="text-blue-500 hover:underline" to="/">
-//           Hem
-//         </Link>
-//         <Link className="text-blue-500 hover:underline" to="/about">
-//           About
-//         </Link>
-//       </nav>
-
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/about" element={<About />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;

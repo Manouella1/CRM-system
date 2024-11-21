@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer"); //nodemailer för att skicka mail
 const express = require("express");
 const cors = require("cors");
 const customers = require("./customer.json");
+
 const { Pool } = require("pg");
 
 const app = express();

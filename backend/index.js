@@ -1,14 +1,11 @@
-// diverse importer
 const path = require("path");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
 const nodemailer = require("nodemailer"); //nodemailer för att skicka mail
 const express = require("express");
 const cors = require("cors");
-const dummy = require("./dummy.json");
 const customers = require("./customer.json");
 const { Pool } = require("pg");
 
@@ -24,18 +21,12 @@ const pool = new Pool({
   connectionString: process.env.PGURI,
 });
 
-// edpoints
+// rensat
 
 app.get("/", (req, res) => {
   res.send({ hello: " World!" });
 });
 
-// hämta användare från dummy
-app.get("/dummy", (req, res) => {
-  console.log(dummy);
-
-  res.json(dummy);
-});
 // skapa användarkonto - POST
 app.post("/api/subscribers", (req, res) => {
   const newSubscriber = req.body;

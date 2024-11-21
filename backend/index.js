@@ -235,18 +235,3 @@ app.post("/api/send-newsletter", async (req, res) => {
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
-
-// // Skapa en ny post i Company-tabellen
-// app.post("/api/companies", async (req, res) => {
-//   const { name, email, password } = req.body;
-//   try {
-//     const result = await pool.query(
-//       "INSERT INTO company (name, email, password) VALUES ($1, $2, $3) RETURNING *",
-//       [name, email, password]
-//     );
-//     res.status(201).json(result.rows[0]);
-//   } catch (error) {
-//     console.error("Error inserting company:", error);
-//     res.status(500).json({ error: "Error inserting company" });
-//   }
-// });

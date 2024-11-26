@@ -34,9 +34,18 @@ const CustomerPage: React.FC = () => {
 
   useEffect(() => {
     const fetchCustomers = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(`/api/customers?page=${page}`);
-        setCustomerData((prevData) => [...prevData, ...response.data]);
+        const newCustomers = response.data;
+
+        setCustomerData((prevData) => {
+          const existingIds = new Set(prevData.map((customer) => customer.id));
+          const uniqueCustomers = newCustomers.filter(
+            (customer: { id: number }) => !existingIds.has(customer.id)
+          );
+          return [...prevData, ...uniqueCustomers];
+        });
       } catch (error) {
         console.error("Error fetching customer data:", error);
       } finally {
@@ -109,7 +118,7 @@ const CustomerPage: React.FC = () => {
           )}
         </div>
       )}
-      {!loading && (
+      {!loading && customerData.length > 0 && (
         <button
           onClick={() => setPage((prevPage) => prevPage + 1)}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"

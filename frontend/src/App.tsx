@@ -7,6 +7,7 @@ import CustomerContact from "./pages/CustomerContact";
 import Login from "./pages/LoginCompany";
 import Register from "./pages/RegisterCompany";
 import NewsletterPage from "./pages/CreateNewsletter";
+import GDPRpolicy from "./pages/GDPRpolicy";
 
 function App() {
   const [heartVisible, setHeartVisible] = useState(false);
@@ -82,6 +83,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/create-newsletter" element={<NewsletterPage />} />
+        <Route path="/gdpr-policy" element={<GDPRpolicy />} />
       </Routes>
 
       <div className="flex items-center justify-center h-screen relative">

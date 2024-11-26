@@ -153,37 +153,24 @@ const Login: React.FC = () => {
             </h3>
             <div className="max-h-96 overflow-y-auto text-left">
               <p className="mb-4">
-                Vi samlar in dina personuppgifter för att kunna skicka
-                nyhetserbjudanden och annan relevant information. Dina uppgifter
-                kommer aldrig att delas med tredje part utan ditt uttryckliga
-                medgivande.
+                Vi värnar om din integritet och hanterar dina uppgifter enligt
+                GDPR. Läs mer om vår policy nedan.
               </p>
-              <h4 className="font-medium mb-2">
-                GDPR-Integritetspolicy och Samtycke
-              </h4>
+              <h4 className="font-medium mb-2">Dina rättigheter</h4>
+              <ul className="list-disc pl-5 mb-4">
+                <li>Rätt att få tillgång till och korrigera dina uppgifter.</li>
+                <li>Rätt att dra tillbaka samtycke.</li>
+                <li>Rätt att begära att dina uppgifter tas bort.</li>
+              </ul>
               <p className="mb-4">
-                Läs vår fullständiga{" "}
-                <a
-                  href="/gdpr-policy" // Länk till GDPR-policyn här
-                  className="text-blue-500 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                Läs den fullständiga texten här:
+                <Link
+                  to="/gdpr-policy"
+                  className="text-blue-500 hover:underline ml-1"
                 >
-                  integritetspolicy
-                </a>
-                för mer information.
+                  Se vår fullständiga GDPR-policy
+                </Link>
               </p>
-              <ol className="list-decimal pl-5 space-y-2">
-                <li>Vi samlar in namn, e-postadress och telefonnummer.</li>
-                <li>
-                  Vi kommer endast att använda dina uppgifter för att skicka
-                  relevant information om våra tjänster.
-                </li>
-                <li>
-                  Du har rätt att när som helst begära att dina personuppgifter
-                  tas bort eller ändras.
-                </li>
-              </ol>
             </div>
             <div className="mt-4 flex justify-end">
               <button

@@ -38,8 +38,15 @@ app.post("/api/subscribers", (req, res) => {
 
 // /api/customers - GET
 app.get("/api/customers", async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = 2;
+  const offset = (page - 1) * limit;
+
   try {
-    const result = await pool.query("SELECT * FROM customer");
+    const result = await pool.query(
+      "SELECT * FROM customer ORDER BY id LIMIT $1 OFFSET $2",
+      [limit, offset]
+    );
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching customers:", error);
